@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+	
+	<title>Healings</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/javascript.js"></script>
+  <script>queryFromDatabase()</script>
+</head>
+
+<body>
+
+
+
+
+<div class="container" id="signupDiv">
+
+  <h2>Healings</h2>
+  <h4>Create an account here</h4>
+
+
+<form id="signup">
+  <input id="username" type="text" placeholder="Enter Username" required /><br/>
+
+  <input id="userPass" type="password" min="6" placeholder="Enter Password" required /><br/>
+
+  <input id="firstname" type="text" placeholder="Enter Firstname" required /><br/>
+
+  <input id="lastname" type="text" placeholder="Enter Lastname" required /><br/>
+
+  <input id="email" type="text" placeholder="Enter Email" required/><br/>
+
+  <input type="submit" value="Submit">
+</form>
+
+</div>
+<script>
+$("#signup").submit(function(event){
+  Parse.initialize("518e0dbca14e73748f81e550e12deea515ff959e");
+  Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse';
+  event.preventDefault();
+
+  //build a check for password and require all values
+  var username = $("#username").val();
+  var password = $("#userPass").val();
+  var firstname = $("#firstname").val();
+  var lastname = $("#lastname").val();
+  var email = $("#email").val();
+
+  var user = new Parse.User();
+
+  user.set("username", username);
+  user.set("password", password);
+  user.set("firstName", firstname);
+  user.set("lastName", lastname);
+  user.set("email", email);
+
+  user.signUp(null, {
+      success:function(user){
+
+      }, error: function(user, error){
+       console.error("signup error:", error)
+      }
+  });
+});
+</script>
+
+<div class= "container" id="pullData"></div>
+</body>
+
+</html>

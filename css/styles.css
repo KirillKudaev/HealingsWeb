@@ -1,0 +1,17 @@
+#signupDiv{
+	text-align:center;
+	background-color: PaleGreen;
+	/*height: 1000px;*/
+	font-family: Verdana, Geneva;
+
+}
+
+#signup input{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+p, #pullData{
+	font-family: Verdana, Geneva;
+	background-color: PaleGreen;
+}
