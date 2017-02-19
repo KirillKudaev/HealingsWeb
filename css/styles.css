@@ -1,6 +1,6 @@
 #signupDiv{
 	text-align:center;
-	background-color: PaleGreen;
+	background-color: DarkSeaGreen;
 	/*height: 1000px;*/
 	font-family: Verdana, Geneva;
 
@@ -13,5 +13,5 @@
 
 p, #pullData{
 	font-family: Verdana, Geneva;
-	background-color: PaleGreen;
+	background-color: DarkSeaGreen;
 }

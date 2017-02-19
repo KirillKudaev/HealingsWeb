@@ -14,67 +14,100 @@
 
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/javascript.js"></script>
-  <script>queryFromDatabase()</script>
+
+  <script>
+  queryFromDatabase();
+  </script>
 </head>
 
 <body>
-
-
-
-
+<!--
 <div class="container" id="signupDiv">
 
   <h2>Healings</h2>
   <h4>Create an account here</h4>
 
-
 <form id="signup">
-  <input id="username" type="text" placeholder="Enter Username" required /><br/>
+  <input id="createUsername" type="text" placeholder="Enter Username" required /><br/>
 
-  <input id="userPass" type="password" min="6" placeholder="Enter Password" required /><br/>
+  <input id="createUserPass" type="password" min="6" placeholder="Enter Password" required /><br/>
 
-  <input id="firstname" type="text" placeholder="Enter Firstname" required /><br/>
+  <input id="createFirstname" type="text" placeholder="Enter Firstname" required /><br/>
 
-  <input id="lastname" type="text" placeholder="Enter Lastname" required /><br/>
+  <input id="createLastname" type="text" placeholder="Enter Lastname" required /><br/>
 
-  <input id="email" type="text" placeholder="Enter Email" required/><br/>
+  <input id="createEmail" type="text" placeholder="Enter Email" required/><br/>
 
   <input type="submit" value="Submit">
 </form>
 
 </div>
-<script>
-$("#signup").submit(function(event){
-  Parse.initialize("518e0dbca14e73748f81e550e12deea515ff959e");
-  Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse';
-  event.preventDefault();
+-->
 
-  //build a check for password and require all values
-  var username = $("#username").val();
-  var password = $("#userPass").val();
-  var firstname = $("#firstname").val();
-  var lastname = $("#lastname").val();
-  var email = $("#email").val();
 
-  var user = new Parse.User();
+<div class="container">
+  <h3>Post a Healing</h3>
+  <form id="postHealing">
+    <div class="form-group row">
+      <label for="title" class="col-sm-2 col-form-label">Title</label>
+      <div class="col-sm-10">
+        <input type="text"  id="title" placeholder="Title">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="body" class="col-sm-2 col-form-label">Body</label>
+      <div class="col-sm-10">
+        <textarea rows="20" cols="100" id="body" type="text" placeholder="Type healing body"></textarea>  
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2">Anonymous</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" id="anon" type="checkbox">Check for Anonymous Posting
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+      <input type="submit" value="submit"/>
+        <button type="submit" value="submit" class="btn btn-primary">Post Healing</button>
+      </div>
+    </div>
+  </form>
+</div>
 
-  user.set("username", username);
-  user.set("password", password);
-  user.set("firstName", firstname);
-  user.set("lastName", lastname);
-  user.set("email", email);
 
-  user.signUp(null, {
-      success:function(user){
-
-      }, error: function(user, error){
-       console.error("signup error:", error)
-      }
-  });
-});
-</script>
+<!--
+<div class="container">
+<h3>Login to your account</h3>
+  <form id="login">
+    <div class="form-group row">
+      <label for="loginUsername" class="col-sm-2 col-form-label">Username</label>
+      <div class="col-sm-10">
+        <input type="text" id="loginUsername" placeholder="Username">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="password" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" id="loginPassword" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+      <input type="submit" value="submit"/>
+        <button type="submit" value="submit" class="btn btn-primary">Sign in</button>-
+      </div>
+    </div>
+  </form>
+</div>
+-->
 
 <div class= "container" id="pullData"></div>
+
 </body>
 
 </html>
