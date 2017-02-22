@@ -32,7 +32,7 @@ error: function(error) {
 function signUp(){
 $("#signup").submit(function(event){
 Parse.initialize("518e0dbca14e73748f81e550e12deea515ff959e");
-Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse';
+Parse.serverURL = "http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse";
 event.preventDefault();
 
 //build a check for password and require all values
@@ -40,20 +40,20 @@ var username = $("#createUsername").val();
 var password = $("#createUserPass").val();
 var firstname = $("#createFirstname").val();
 var lastname = $("#createLastname").val();
-var email = $("#createEmail").val();
+//var email = $("#createEmail").val();
 
 //create new user
 var user = new Parse.User();
 
 //set values for user
-user.set("createUsername", username);
-user.set("createPassword", password);
-user.set("createFirstName", firstname);
-user.set("createLastName", lastname);
-user.set("createEmail", email);
+user.set("username", username);
+user.set("password", password);
+user.set("firstName", firstname);
+user.set("lastName", lastname);
+//user.set("email", email);
 
   //create the account
-  user.signUp(null, {
+  user.signUp( null, {
       success:function(user){
 
       }, error: function(user, error){
