@@ -1,9 +1,8 @@
-$(document).ready(function(){
+Parse.initialize("518e0dbca14e73748f81e550e12deea515ff959e");
+Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse';
 //pulls all of the healing posts in decending order
 //starting from the most recent post
   function queryFromDatabase(){
-  	Parse.initialize("518e0dbca14e73748f81e550e12deea515ff959e");
-  	Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse';
     var healings = Parse.Object.extend("Healing");
   	var query = new Parse.Query(healings);
     //using healings object
@@ -31,8 +30,6 @@ $(document).ready(function(){
   //password twice
   function signup(){
   $("#signup").click(function(event){
-    Parse.initialize("518e0dbca14e73748f81e550e12deea515ff959e");
-    Parse.serverURL = "http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse";
     event.preventDefault();
 
     //build a check for password and require all values
@@ -41,7 +38,7 @@ $(document).ready(function(){
     var firstname = $("#createFirstname").val();
     var lastname = $("#createLastname").val();
     //var email = $("#createEmail").val();
-
+    
     //create new user
     var user = new Parse.User();
 
@@ -52,7 +49,6 @@ $(document).ready(function(){
     user.set("lastName", lastname);
     //user.set("email", email);
 
-
       //create the account
       user.signUp( null, {
           success:function(user){
@@ -62,12 +58,12 @@ $(document).ready(function(){
           }
       });
   });
-  }
+  };
 
 
   //posts a healing, with anonymous capabilities
-  function postHealing(){
-  $("#postHealing").submit(function(event){
+  function healingsPost(){
+  $("#postbtn").click(function(event){
     Parse.initialize("518e0dbca14e73748f81e550e12deea515ff959e");
     Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse';
     event.preventDefault();
@@ -75,7 +71,10 @@ $(document).ready(function(){
     //build a check for password and require all values
     var title = $("#title").val();
     var body = $("#body").val();
-    var anon = $("#anon").val();
+    var anon = $("#anon").is(':checked');
+
+    var currUser = Parse.User;
+    var currName = currUser.username;
     //set user value with who is logged in currently
 
     //make a new healing object
@@ -86,7 +85,7 @@ $(document).ready(function(){
     newHealing.set("title", title);
     newHealing.set("body", body);
     newHealing.set("anon", anon);
-    //newHealing.set("", username);
+    newHealing.set("username", currName);
 
     //save the healng contents
     newHealing.save(null, {
@@ -98,15 +97,13 @@ $(document).ready(function(){
       }
     });
   });
-  }
+  };
 
 
   //grabs variables in login form logs in
   //the user to their correct account
   function login(){
-  $("#login").click(function(event){
-    Parse.initialize("518e0dbca14e73748f81e550e12deea515ff959e");
-    Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/parse';
+  $("#loginbtn").click(function(event){
     event.preventDefault();
 
     var loginUser = $("#loginUsername").val();
@@ -116,7 +113,7 @@ $(document).ready(function(){
 
     Parse.User.logIn(loginUser, loginPass, {
       success: function(user) {
-        console.log(user);
+        console.log(Parse.Session.current());
         //send user to their feed page
         // Do stuff after successful login.
       },
@@ -126,7 +123,7 @@ $(document).ready(function(){
       }
   });
   });
-  }
+  };
 
   // function logout(){
   //    http://stackoverflow.com/questions/29952249/how-to-create-log-out-script-parse-javascript
@@ -136,4 +133,3 @@ $(document).ready(function(){
   //   }
   // }
 
-});
