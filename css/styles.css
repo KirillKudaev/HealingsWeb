@@ -16,3 +16,10 @@
 	font-family: Verdana, Geneva;
 	background-color: DarkSeaGreen;
 }
+
+.healing{
+	background-color: DarkSeaGreen;
+}
+.healing h4{
+	margin-top: 0.2em;
+}

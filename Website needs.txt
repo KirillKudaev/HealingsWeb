@@ -1,0 +1,3 @@
+Needs:
+	Fix bugs in post, create, logout, and login
+	decompose JSON objects so we can see their contents

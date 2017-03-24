@@ -7,7 +7,7 @@ Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/p
   	var query = new Parse.Query(healings);
     //using healings object
 
-   query.descending("updatedAt");
+   query.descending("createdAt");
     query.find({
     success: function(results) {
       //alert("Successfully retrieved " + results.length + " foos.");
@@ -15,7 +15,35 @@ Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/p
       //print out each object in its own paragraph
       for(var i = 0; i < results.length; i++){
         var object = results[i];
-        document.getElementById("pullData").innerHTML += "<h4>" + object.get("title") + "</h4><p>" + object.get("body") + "</p>";
+        
+        //date objects: when posted and current
+        var posted = new Date(object.get("createdAt"));
+        var now = new Date();
+
+        //divide into workable and readable format
+        var diff = new Date(now - posted);
+        var minute = diff.getMinutes();
+        var day = diff.getDate();
+        var month = diff.getMonth()+1;  
+        var year = diff.getFullYear();  //new form of obj.getYear()
+
+        //logic for date since posted
+        var since = null;
+        if(year > 1970) //base year
+          since = year + " years ago";
+        else if(month > 1)
+          since = month + " months ago";
+        else if(day > 0)
+          since = day + " days ago";
+        else if(minute > 0)
+          since = minute + " minutes ago";
+       
+        //print each healing object into a div to page
+        document.getElementById("displayhealings").innerHTML += ("<div class='healing'>"
+          + "<h4>" + object.get("title") + "</h4>"
+          + "<h5>Posted : " + since + "</h5>"
+          + "<p>" + object.get("body") + "</p>"
+          +"</div>");
       }
     },
   error: function(error) {
@@ -84,7 +112,9 @@ Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/p
     newHealing.set("title", title);
     newHealing.set("body", body);
     newHealing.set("anon", anon);
-    newHealing.set("username", username );
+    if(!anon) {
+        newHealing.set("username", username);
+    }
 
     //save the healng contents
     newHealing.save(null, {
