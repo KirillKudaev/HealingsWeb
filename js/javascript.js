@@ -41,7 +41,7 @@ Parse.serverURL = 'http://ec2-35-165-199-91.us-west-2.compute.amazonaws.com:80/p
         //print each healing object into a div to page
         document.getElementById("displayhealings").innerHTML += ("<div class='healing'>"
           + "<h4>" + object.get("title") + "</h4>"
-          + "<h5>Posted : " + since + "</h5>"
+          + "<h5>Posted by: " + object.get("username") + since + "</h5>"
           + "<p>" + object.get("body") + "</p>"
           +"</div>");
       }
